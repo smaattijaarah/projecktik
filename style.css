@@ -1,0 +1,450 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background: #123c35;
+    color: white;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    margin-bottom: 35px;
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #d8b25c;
+    color: #123c35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.logo h2 {
+    font-size: 18px;
+}
+
+.logo span {
+    font-size: 11px;
+    opacity: .7;
+}
+
+
+/* MENU */
+
+nav a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #dbe8e5;
+    text-decoration: none;
+    padding: 13px 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+nav a:hover,
+nav a.active {
+    background: #1d5b50;
+    color: white;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 15px;
+    color: #b9cfca;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    margin-left: 250px;
+    padding: 30px;
+}
+
+
+/* HEADER */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 7px;
+}
+
+.header p {
+    color: #6b7280;
+}
+
+.date-box {
+    text-align: right;
+    background: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.05);
+}
+
+.date-box span {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.date-box strong {
+    display: block;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.statistics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.05);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.hadir {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.izin {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.sakit {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.alpa {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.stat-card span {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.stat-card h2 {
+    margin-top: 4px;
+}
+
+
+/* =========================
+   CONTENT CARD
+========================= */
+
+.content-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 15px rgba(0,0,0,.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.section-header p {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.filter-area input,
+.filter-area select {
+    width: 100%;
+    border: 1px solid #dce1e7;
+    padding: 11px 12px;
+    border-radius: 8px;
+    outline: none;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1d5b50;
+}
+
+
+/* BUTTON */
+
+.btn-primary {
+    border: none;
+    background: #123c35;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background: #1d5b50;
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+.filter-area {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-area input {
+    width: 180px;
+}
+
+.filter-area select {
+    width: 130px;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f7f9fb;
+}
+
+th {
+    text-align: left;
+    font-size: 12px;
+    color: #6b7280;
+    padding: 13px;
+}
+
+td {
+    padding: 13px;
+    border-top: 1px solid #edf0f3;
+    font-size: 13px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.status-hadir {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-izin {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.status-sakit {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.status-alpa {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/* ACTION */
+
+.btn-delete {
+    border: none;
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 6px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background: #fecaca;
+}
+
+
+/* EMPTY */
+
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #9ca3af;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    nav {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 18px;
+    }
+
+    .header {
+        display: block;
+    }
+
+    .date-box {
+        margin-top: 15px;
+        text-align: left;
+    }
+
+    .statistics {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        display: block;
+    }
+
+    .filter-area {
+        margin-top: 15px;
+        flex-direction: column;
+    }
+
+    .filter-area input,
+    .filter-area select {
+        width: 100%;
+    }
+
+}

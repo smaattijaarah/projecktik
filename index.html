@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi SMA At-Tijaarah</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">AT</div>
+            <div>
+                <h2>At-Tijaarah</h2>
+                <span>School Attendance</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#" class="active">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a href="#">
+                <span>📝</span>
+                Absensi
+            </a>
+
+            <a href="#">
+                <span>👨‍🎓</span>
+                Data Siswa
+            </a>
+
+            <a href="#">
+                <span>📋</span>
+                Rekap Absensi
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <small>© 2026</small>
+            <p>SMA At-Tijaarah</p>
+        </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="header">
+            <div>
+                <h1>Dashboard Absensi</h1>
+                <p>Selamat datang di sistem absensi SMA At-Tijaarah</p>
+            </div>
+
+            <div class="date-box">
+                <span id="currentDate"></span>
+                <strong id="currentTime"></strong>
+            </div>
+        </header>
+
+
+        <!-- STATISTICS -->
+        <section class="statistics">
+
+            <div class="stat-card">
+                <div class="stat-icon hadir">✓</div>
+                <div>
+                    <span>Hadir</span>
+                    <h2 id="totalHadir">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon izin">I</div>
+                <div>
+                    <span>Izin</span>
+                    <h2 id="totalIzin">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon sakit">S</div>
+                <div>
+                    <span>Sakit</span>
+                    <h2 id="totalSakit">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon alpa">A</div>
+                <div>
+                    <span>Alpa</span>
+                    <h2 id="totalAlpa">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- FORM ABSENSI -->
+        <section class="content-card">
+
+            <div class="section-header">
+                <div>
+                    <h2>Input Absensi</h2>
+                    <p>Masukkan data kehadiran siswa</p>
+                </div>
+            </div>
+
+            <form id="attendanceForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="nis">NIS</label>
+                        <input
+                            type="text"
+                            id="nis"
+                            placeholder="Masukkan NIS"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nama">Nama Siswa</label>
+                        <input
+                            type="text"
+                            id="nama"
+                            placeholder="Masukkan nama siswa"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+
+                        <select id="kelas" required>
+                            <option value="">Pilih kelas</option>
+                            <option value="X">X</option>
+                            <option value="XI">XI</option>
+                            <option value="XII">XII</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status Kehadiran</label>
+
+                        <select id="status" required>
+                            <option value="">Pilih status</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Izin">Izin</option>
+                            <option value="Sakit">Sakit</option>
+                            <option value="Alpa">Alpa</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    + Simpan Absensi
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- DATA ABSENSI -->
+        <section class="content-card">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Data Absensi</h2>
+                    <p>Riwayat kehadiran siswa</p>
+                </div>
+
+                <div class="filter-area">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="🔍 Cari nama/NIS..."
+                    >
+
+                    <select id="filterKelas">
+                        <option value="">Semua Kelas</option>
+                        <option value="X">X</option>
+                        <option value="XI">XI</option>
+                        <option value="XII">XII</option>
+                    </select>
+
+                    <select id="filterStatus">
+                        <option value="">Semua Status</option>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Izin">Izin</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Alpa">Alpa</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>NIS</th>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="attendanceTable">
+                    </tbody>
+
+                </table>
+
+                <div id="emptyMessage" class="empty">
+                    Belum ada data absensi.
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+</html>
