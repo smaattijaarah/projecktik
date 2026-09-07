@@ -1,250 +1,480 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absensi SMA At-Tijaarah</title>
+    <title>SMA At-Tijaarah Sukabumi</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS Configurations -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#4ade80', // emerald-400
+                            DEFAULT: '#10b981', // emerald-500
+                            dark: '#047857', // emerald-700
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for things not easily done with Tailwind classes */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(4, 120, 87, 0.8), rgba(16, 185, 129, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #047857; 
+        }
+    </style>
 </head>
+<body class="bg-gray-50 text-gray-800 antialiased overflow-x-hidden">
 
-<body>
+    <!-- Navbar Section -->
+    <nav class="bg-white shadow-md fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-brand rounded-full flex items-center justify-center text-white font-bold text-xl mr-3 shadow-lg">
+                        AT
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-brand-dark leading-tight">SMA At-Tijaarah</h1>
+                        <p class="text-xs text-gray-500">Sukabumi</p>
+                    </div>
+                </div>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">AT</div>
-            <div>
-                <h2>At-Tijaarah</h2>
-                <span>School Attendance</span>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#beranda" class="text-gray-600 hover:text-brand font-medium transition-colors">Beranda</a>
+                    <a href="#profil" class="text-gray-600 hover:text-brand font-medium transition-colors">Profil</a>
+                    <a href="#akademik" class="text-gray-600 hover:text-brand font-medium transition-colors">Akademik</a>
+                    <a href="#ekstrakurikuler" class="text-gray-600 hover:text-brand font-medium transition-colors">Ekstrakurikuler</a>
+                    <a href="#kontak" class="text-gray-600 hover:text-brand font-medium transition-colors">Kontak</a>
+                    <a href="#ppdb" class="bg-brand hover:bg-brand-dark text-white px-5 py-2 rounded-full font-medium transition-colors shadow-md">PPDB 2026</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <nav>
-            <a href="#" class="active">
-                <span>📊</span>
-                Dashboard
-            </a>
-
-            <a href="#">
-                <span>📝</span>
-                Absensi
-            </a>
-
-            <a href="#">
-                <span>👨‍🎓</span>
-                Data Siswa
-            </a>
-
-            <a href="#">
-                <span>📋</span>
-                Rekap Absensi
-            </a>
-        </nav>
-
-        <div class="sidebar-footer">
-            <small>© 2026</small>
-            <p>SMA At-Tijaarah</p>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#beranda" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand hover:bg-gray-50 rounded-md mobile-link">Beranda</a>
+                <a href="#profil" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand hover:bg-gray-50 rounded-md mobile-link">Profil</a>
+                <a href="#akademik" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand hover:bg-gray-50 rounded-md mobile-link">Akademik</a>
+                <a href="#ekstrakurikuler" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand hover:bg-gray-50 rounded-md mobile-link">Ekstrakurikuler</a>
+                <a href="#kontak" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand hover:bg-gray-50 rounded-md mobile-link">Kontak</a>
+                <a href="#ppdb" class="block mt-4 text-center bg-brand text-white px-5 py-3 rounded-md font-medium mobile-link">Daftar PPDB Sekarang</a>
+            </div>
         </div>
-    </aside>
+    </nav>
 
+    <!-- Main Content -->
+    <main class="pt-20"> <!-- Padding top to account for fixed navbar -->
 
-    <!-- MAIN CONTENT -->
-    <main class="main">
-
-        <!-- HEADER -->
-        <header class="header">
-            <div>
-                <h1>Dashboard Absensi</h1>
-                <p>Selamat datang di sistem absensi SMA At-Tijaarah</p>
-            </div>
-
-            <div class="date-box">
-                <span id="currentDate"></span>
-                <strong id="currentTime"></strong>
-            </div>
-        </header>
-
-
-        <!-- STATISTICS -->
-        <section class="statistics">
-
-            <div class="stat-card">
-                <div class="stat-icon hadir">✓</div>
-                <div>
-                    <span>Hadir</span>
-                    <h2 id="totalHadir">0</h2>
+        <!-- Hero Section -->
+        <section id="beranda" class="hero-bg h-[80vh] flex items-center justify-center relative">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                <span class="text-brand-light font-semibold tracking-wider uppercase text-sm mb-4 block">Selamat Datang di</span>
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">SMA At-Tijaarah <br> Sukabumi</h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                    Membentuk Generasi Cerdas, Berprestasi, dan Berakhlak Mulia berlandaskan nilai-nilai spiritual dan kewirausahaan.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#profil" class="bg-white text-brand-dark px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg">
+                        Kenali Kami
+                    </a>
+                    <a href="#ppdb" class="bg-brand text-white px-8 py-3 rounded-full font-bold hover:bg-brand-dark transition-colors border border-brand-light shadow-lg">
+                        Info Pendaftaran
+                    </a>
                 </div>
             </div>
-
-            <div class="stat-card">
-                <div class="stat-icon izin">I</div>
-                <div>
-                    <span>Izin</span>
-                    <h2 id="totalIzin">0</h2>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon sakit">S</div>
-                <div>
-                    <span>Sakit</span>
-                    <h2 id="totalSakit">0</h2>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon alpa">A</div>
-                <div>
-                    <span>Alpa</span>
-                    <h2 id="totalAlpa">0</h2>
-                </div>
-            </div>
-
         </section>
 
+        <!-- Profil Section -->
+        <section id="profil" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 inline-block relative">
+                        Profil Sekolah
+                        <span class="absolute bottom-0 left-1/2 w-12 h-1 bg-brand -translate-x-1/2 -mb-2 rounded"></span>
+                    </h2>
+                    <p class="mt-6 text-gray-600 max-w-2xl mx-auto">
+                        SMA At-Tijaarah Sukabumi mendedikasikan diri untuk mencetak bibit-bibit unggul yang tidak hanya cerdas secara akademik, namun juga tangguh dan memiliki jiwa kepemimpinan.
+                    </p>
+                </div>
 
-        <!-- FORM ABSENSI -->
-        <section class="content-card">
-
-            <div class="section-header">
-                <div>
-                    <h2>Input Absensi</h2>
-                    <p>Masukkan data kehadiran siswa</p>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="rounded-2xl overflow-hidden shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Siswa SMA At-Tijaarah" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-brand card-hover">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                <i class="fas fa-eye text-brand"></i> Visi
+                            </h3>
+                            <p class="text-gray-600">Menjadi lembaga pendidikan terdepan yang menghasilkan lulusan berakhlakul karimah, unggul dalam IMTAQ dan IPTEK, serta berjiwa entrepreneur.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-xl border-l-4 border-brand card-hover">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                <i class="fas fa-bullseye text-brand"></i> Misi
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-600 space-y-2">
+                                <li>Menyelenggarakan pendidikan berbasis karakter islami.</li>
+                                <li>Meningkatkan kualitas akademik dan non-akademik siswa.</li>
+                                <li>Menumbuhkan jiwa kewirausahaan sejak dini.</li>
+                                <li>Menciptakan lingkungan sekolah yang asri, aman, dan nyaman.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <form id="attendanceForm">
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-                        <label for="nis">NIS</label>
-                        <input
-                            type="text"
-                            id="nis"
-                            placeholder="Masukkan NIS"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nama">Nama Siswa</label>
-                        <input
-                            type="text"
-                            id="nama"
-                            placeholder="Masukkan nama siswa"
-                            required
-                        >
-                    </div>
-
-                    <div class="form-group">
-                        <label for="kelas">Kelas</label>
-
-                        <select id="kelas" required>
-                            <option value="">Pilih kelas</option>
-                            <option value="X">X</option>
-                            <option value="XI">XI</option>
-                            <option value="XII">XII</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status Kehadiran</label>
-
-                        <select id="status" required>
-                            <option value="">Pilih status</option>
-                            <option value="Hadir">Hadir</option>
-                            <option value="Izin">Izin</option>
-                            <option value="Sakit">Sakit</option>
-                            <option value="Alpa">Alpa</option>
-                        </select>
-                    </div>
-
+        <!-- Akademik Section -->
+        <section id="akademik" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 inline-block relative">
+                        Program Akademik
+                        <span class="absolute bottom-0 left-1/2 w-12 h-1 bg-brand -translate-x-1/2 -mb-2 rounded"></span>
+                    </h2>
                 </div>
 
-                <button type="submit" class="btn-primary">
-                    + Simpan Absensi
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- MIPA -->
+                    <div class="bg-white rounded-2xl p-8 shadow-md card-hover text-center border-t-4 border-brand">
+                        <div class="w-16 h-16 bg-brand-light bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">MIPA</h3>
+                        <p class="text-gray-600 mb-6">Matematika dan Ilmu Pengetahuan Alam. Mempersiapkan siswa untuk unggul di bidang sains, teknologi, dan kedokteran.</p>
+                        <ul class="text-sm text-gray-500 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-brand mr-2"></i> Laboratorium Fisika, Kimia, Biologi lengkap</li>
+                            <li><i class="fas fa-check text-brand mr-2"></i> Persiapan Olimpiade Sains Nasional (OSN)</li>
+                            <li><i class="fas fa-check text-brand mr-2"></i> Kunjungan industri dan riset</li>
+                        </ul>
+                    </div>
+
+                    <!-- IPS -->
+                    <div class="bg-white rounded-2xl p-8 shadow-md card-hover text-center border-t-4 border-blue-500">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-500 text-2xl">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">IPS</h3>
+                        <p class="text-gray-600 mb-6">Ilmu Pengetahuan Sosial. Memfokuskan pada pengembangan pemahaman sosial, ekonomi, dan kewirausahaan.</p>
+                        <ul class="text-sm text-gray-500 text-left space-y-2 mb-6">
+                            <li><i class="fas fa-check text-blue-500 mr-2"></i> Program inkubator bisnis siswa</li>
+                            <li><i class="fas fa-check text-blue-500 mr-2"></i> Studi lapangan sosiologi & geografi</li>
+                            <li><i class="fas fa-check text-blue-500 mr-2"></i> Pelatihan public speaking & kepemimpinan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ekstrakurikuler Section -->
+        <section id="ekstrakurikuler" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 inline-block relative">
+                        Ekstrakurikuler
+                        <span class="absolute bottom-0 left-1/2 w-12 h-1 bg-brand -translate-x-1/2 -mb-2 rounded"></span>
+                    </h2>
+                    <p class="mt-6 text-gray-600">Kembangkan bakat dan minatmu melalui berbagai kegiatan organisasi dan ekstrakurikuler kami.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-brand mb-4"><i class="fas fa-campground"></i></div>
+                        <h4 class="font-bold text-gray-900">Pramuka</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-red-500 mb-4"><i class="fas fa-flag"></i></div>
+                        <h4 class="font-bold text-gray-900">Paskibra</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-green-600 mb-4"><i class="fas fa-mosque"></i></div>
+                        <h4 class="font-bold text-gray-900">Rohis</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-orange-500 mb-4"><i class="fas fa-basketball-ball"></i></div>
+                        <h4 class="font-bold text-gray-900">Olahraga</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-yellow-500 mb-4"><i class="fas fa-palette"></i></div>
+                        <h4 class="font-bold text-gray-900">Seni Budaya</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-blue-400 mb-4"><i class="fas fa-camera"></i></div>
+                        <h4 class="font-bold text-gray-900">Jurnalistik</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-indigo-500 mb-4"><i class="fas fa-laptop-code"></i></div>
+                        <h4 class="font-bold text-gray-900">Klub IT</h4>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-6 text-center card-hover">
+                        <div class="text-3xl text-gray-700 mb-4"><i class="fas fa-comments-dollar"></i></div>
+                        <h4 class="font-bold text-gray-900">Kewirausahaan</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PPDB Banner -->
+        <section id="ppdb" class="py-16 bg-brand relative overflow-hidden">
+            <!-- Decorative circles -->
+            <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-10"></div>
+            <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-48 h-48 rounded-full bg-white opacity-10"></div>
+            
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Penerimaan Peserta Didik Baru (PPDB) 2026-2027</h2>
+                <p class="text-brand-light text-white mb-8 text-lg">Pendaftaran gelombang pertama telah dibuka! Dapatkan beasiswa khusus bagi siswa berprestasi.</p>
+                <button onclick="openModal('ppdb-modal')" class="bg-white text-brand-dark px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center mx-auto gap-2">
+                    <i class="fas fa-user-plus"></i> Daftar Sekarang
                 </button>
-
-            </form>
-
+            </div>
         </section>
 
+        <!-- Kontak & Footer Section -->
+        <section id="kontak" class="pt-20 bg-gray-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+                <div class="grid md:grid-cols-2 gap-12">
+                    
+                    <!-- Informasi Kontak -->
+                    <div>
+                        <h2 class="text-3xl font-bold mb-6 text-white relative inline-block">
+                            Hubungi Kami
+                            <span class="absolute bottom-0 left-0 w-12 h-1 bg-brand -mb-2 rounded"></span>
+                        </h2>
+                        <p class="text-gray-400 mb-8">Jangan ragu untuk menghubungi kami untuk pertanyaan seputar sekolah, pendaftaran, atau informasi lainnya.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-brand flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Alamat</h4>
+                                    <p class="text-gray-400">Jl. Pendidikan No. 123, Kecamatan Cisaat, Kota Sukabumi, Jawa Barat 43152</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-brand flex-shrink-0">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Telepon / WA</h4>
+                                    <p class="text-gray-400">(0266) 123-4567 / 0812-3456-7890</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-brand flex-shrink-0">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Email</h4>
+                                    <p class="text-gray-400">info@smaattijaarah-smi.sch.id</p>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- DATA ABSENSI -->
-        <section class="content-card">
+                        <!-- Sosial Media -->
+                        <div class="mt-8 flex gap-4">
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand transition-colors text-white">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand transition-colors text-white">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand transition-colors text-white">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
 
-            <div class="section-header">
+                    <!-- Form Pesan -->
+                    <div class="bg-gray-800 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Kirim Pesan</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Nama Lengkap</label>
+                                <input type="text" required class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-brand text-white placeholder-gray-500" placeholder="Masukkan nama Anda">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Email / No. HP</label>
+                                <input type="text" required class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-brand text-white placeholder-gray-500" placeholder="Kontak yang bisa dihubungi">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-400 mb-1">Pesan</label>
+                                <textarea rows="4" required class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:border-brand text-white placeholder-gray-500 resize-none" placeholder="Tuliskan pesan atau pertanyaan Anda..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand hover:bg-brand-dark text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                                Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
 
-                <div>
-                    <h2>Data Absensi</h2>
-                    <p>Riwayat kehadiran siswa</p>
                 </div>
-
-                <div class="filter-area">
-
-                    <input
-                        type="text"
-                        id="searchInput"
-                        placeholder="🔍 Cari nama/NIS..."
-                    >
-
-                    <select id="filterKelas">
-                        <option value="">Semua Kelas</option>
-                        <option value="X">X</option>
-                        <option value="XI">XI</option>
-                        <option value="XII">XII</option>
-                    </select>
-
-                    <select id="filterStatus">
-                        <option value="">Semua Status</option>
-                        <option value="Hadir">Hadir</option>
-                        <option value="Izin">Izin</option>
-                        <option value="Sakit">Sakit</option>
-                        <option value="Alpa">Alpa</option>
-                    </select>
-
-                </div>
-
             </div>
 
-
-            <div class="table-container">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Waktu</th>
-                            <th>NIS</th>
-                            <th>Nama Siswa</th>
-                            <th>Kelas</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="attendanceTable">
-                    </tbody>
-
-                </table>
-
-                <div id="emptyMessage" class="empty">
-                    Belum ada data absensi.
-                </div>
-
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 py-6 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 SMA At-Tijaarah Sukabumi. All rights reserved.</p>
             </div>
-
         </section>
-
     </main>
 
+    <!-- Custom Modals (Alert Replacement) -->
+    
+    <!-- Modal PPDB -->
+    <div id="ppdb-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm modal-overlay" onclick="closeModal('ppdb-modal')"></div>
+        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-md w-full relative z-10 transform transition-all scale-100">
+            <button onclick="closeModal('ppdb-modal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-brand-light bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4 text-brand text-3xl">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">Informasi PPDB</h3>
+                <p class="text-gray-600 mt-2">Pendaftaran online untuk tahun ajaran baru saat ini sedang dipersiapkan. Silakan tinggalkan kontak Anda di form bawah untuk kami hubungi.</p>
+            </div>
+            <button onclick="closeModal('ppdb-modal')" class="w-full bg-brand text-white font-bold py-3 px-4 rounded-lg hover:bg-brand-dark transition-colors">
+                Tutup Peringatan
+            </button>
+        </div>
+    </div>
 
-    <!-- JAVASCRIPT -->
-    <script src="script.js"></script>
+    <!-- Modal Sukses Kirim Pesan -->
+    <div id="success-modal" class="fixed inset-0 z-[60] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm modal-overlay" onclick="closeModal('success-modal')"></div>
+        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-sm w-full relative z-10 text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-3xl">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Pesan Terkirim!</h3>
+            <p class="text-gray-600 mb-6">Terima kasih, pesan Anda telah kami terima. Admin sekolah akan segera merespon.</p>
+            <button onclick="closeModal('success-modal')" class="w-full bg-brand text-white font-bold py-2 px-4 rounded-lg hover:bg-brand-dark transition-colors">
+                Selesai
+            </button>
+        </div>
+    </div>
 
+    <!-- JavaScript Variables and Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle Logic
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')){
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+
+            // Contact Form Submission Handler (Prevent default and show custom modal)
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent page reload
+                // Here you would normally process data (send to backend/API)
+                
+                // Show Success Modal
+                openModal('success-modal');
+                contactForm.reset(); // Clear form
+            });
+        });
+
+        // Global Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }
+        }
+    </script>
 </body>
 </html>
